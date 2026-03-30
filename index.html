@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Link Hub</title>
+  <style>
+    :root {
+      --bg1: #f8fafc;
+      --bg2: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --soft: #64748b;
+      --border: #e2e8f0;
+      --card: rgba(255, 255, 255, 0.88);
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --shadow-hover: 0 22px 50px rgba(15, 23, 42, 0.12);
+      --accent: #111827;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg1), var(--bg2));
+    }
+
+    .wrap {
+      width: min(100%, 760px);
+      margin: 0 auto;
+      padding: 48px 20px 60px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 32px;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .avatar {
+      width: 96px;
+      height: 96px;
+      margin: 0 auto 18px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      color: white;
+      font-size: 32px;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+      letter-spacing: 0.03em;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      line-height: 1.1;
+    }
+
+    .title {
+      margin-top: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .subtitle {
+      max-width: 640px;
+      margin: 14px auto 0;
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--soft);
+    }
+
+    .links {
+      display: grid;
+      gap: 16px;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 20px;
+      text-decoration: none;
+      color: inherit;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .link-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+      border-color: #cbd5e1;
+    }
+
+    .left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: #f1f5f9;
+      color: #334155;
+      flex-shrink: 0;
+      font-size: 22px;
+    }
+
+    .text-block {
+      min-width: 0;
+    }
+
+    .link-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .link-desc {
+      margin-top: 4px;
+      font-size: 0.93rem;
+      color: var(--soft);
+      line-height: 1.4;
+    }
+
+    .arrow {
+      color: #94a3b8;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .future-box {
+      margin-top: 28px;
+      padding: 20px;
+      background: rgba(248, 250, 252, 0.8);
+      border: 1px dashed #cbd5e1;
+      border-radius: 24px;
+      animation: fadeUp 0.75s ease both;
+    }
+
+    .future-title {
+      margin: 0 0 10px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #334155;
+    }
+
+    .future-text {
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .future-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .pill {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: white;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 26px;
+      font-size: 0.82rem;
+      color: #94a3b8;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .wrap {
+        padding-top: 34px;
+      }
+
+      .link-card {
+        padding: 16px;
+        border-radius: 20px;
+      }
+
+      .icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="avatar" id="avatar">YN</div>
+      <h1 id="name">Your Name</h1>
+      <div class="title" id="title">Researcher | Physician | Academic</div>
+      <p class="subtitle" id="subtitle">
+        A simple home for my professional links, contact details, and current work.
+      </p>
+    </section>
+
+    <section class="links" id="links"></section>
+
+    <section class="future-box">
+      <h2 class="future-title">Easy to expand later</h2>
+      <p class="future-text">
+        To add more links in the future, just copy one item in the <strong>links</strong> list near the top of this file and change the text and URL.
+      </p>
+      <div class="future-grid">
+        <div class="pill">CV / Resume</div>
+        <div class="pill">Google Scholar</div>
+        <div class="pill">Publications</div>
+        <div class="pill">Conference presentations</div>
+        <div class="pill">Calendly / booking</div>
+        <div class="pill">Portfolio or personal website</div>
+      </div>
+    </section>
+
+    <p class="footer">Built as a simple personal link hub. Replace the placeholder details with your own information.</p>
+  </div>
+
+  <script>
+    /*
+      EDIT THIS SECTION ONLY
+      ----------------------
+      Replace the placeholder values below with your actual details.
+      To add a new item, copy one object inside the links array.
+    */
+
+    const profile = {
+      name: "Dhruva Dave",
+      title: "Researcher | Physician | Academic",
+      subtitle: "A simple home for my professional links, contact details, and current work."
+    };
+
+    const links = [
+      {
+        title: "LinkedIn",
+        description: "Connect with me professionally",
+        url: "https://www.linkedin.com/in/dhruva-dave-945168251/",
+        icon: "💼"
+      },
+      {
+        title: "Research Group Website",
+        description: "See my lab, projects, and research environment",
+        url: "https://sites.uab.edu/arendlab/research-team/",
+        icon: "🔬"
+      },
+      {
+        title: "Email",
+        description: "Reach me directly",
+        url: "mailto:dmdave@uabmc.edu",
+        icon: "✉️"
+      }
+    ];
+
+    const nameEl = document.getElementById("name");
+    const titleEl = document.getElementById("title");
+    const subtitleEl = document.getElementById("subtitle");
+    const avatarEl = document.getElementById("avatar");
+    const linksEl = document.getElementById("links");
+
+    nameEl.textContent = profile.name;
+    titleEl.textContent = profile.title;
+    subtitleEl.textContent = profile.subtitle;
+
+    const initials = profile.name
+      .split(" ")
+      .filter(Boolean)
+      .slice(0, 2)
+      .map(part => part[0].toUpperCase())
+      .join("");
+
+    avatarEl.textContent = initials || "YN";
+
+    links.forEach((link, index) => {
+      const a = document.createElement("a");
+      a.className = "link-card";
+      a.href = link.url;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.style.animationDelay = `${index * 0.08}s`;
+
+      a.innerHTML = `
+        <div class="left">
+          <div class="icon">${link.icon}</div>
+          <div class="text-block">
+            <div class="link-title">${link.title}</div>
+            <div class="link-desc">${link.description}</div>
+          </div>
+        </div>
+        <div class="arrow">↗</div>
+      `;
+
+      linksEl.appendChild(a);
+    });
+  </script>
+</body>
+</html>
