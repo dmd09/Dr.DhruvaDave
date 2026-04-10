@@ -55,6 +55,19 @@
       font-weight: 700;
       box-shadow: var(--shadow);
       letter-spacing: 0.03em;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .avatar .initials {
+      display: inline-block;
     }
 
     h1 {
@@ -227,7 +240,10 @@
 <body>
   <div class="wrap">
     <section class="hero">
-      <div class="avatar" id="avatar">YN</div>
+      <div class="avatar" id="avatar">
+        <img id="headshot" alt="Profile headshot" />
+        <span class="initials" id="initials">YN</span>
+      </div>
       <h1 id="name">Your Name</h1>
       <div class="title" id="title">Researcher | Physician | Academic</div>
       <p class="subtitle" id="subtitle">
@@ -237,22 +253,7 @@
 
     <section class="links" id="links"></section>
 
-    <section class="future-box">
-      <h2 class="future-title">Easy to expand later</h2>
-      <p class="future-text">
-        To add more links in the future, just copy one item in the <strong>links</strong> list near the top of this file and change the text and URL.
-      </p>
-      <div class="future-grid">
-        <div class="pill">CV / Resume</div>
-        <div class="pill">Google Scholar</div>
-        <div class="pill">Publications</div>
-        <div class="pill">Conference presentations</div>
-        <div class="pill">Calendly / booking</div>
-        <div class="pill">Portfolio or personal website</div>
-      </div>
-    </section>
-
-    <p class="footer">Built as a simple personal link hub. Replace the placeholder details with your own information.</p>
+    <p class="footer">Open to collaboration and meaningful conversation.</p>
   </div>
 
   <script>
@@ -264,9 +265,10 @@
     */
 
     const profile = {
-      name: "Dhruva Dave",
-      title: "Researcher | Physician | Academic",
-      subtitle: "A simple home for my professional links, contact details, and current work."
+      name: "Dhruva Dave, MBBS",
+      title: "Postdoctoral Research Fellow | International Medical Graduate | Artist",
+      subtitle: "Explore the links below to connect, collaborate, and learn more about my work.",
+      headshotUrl: "headshot.jpeg"
     };
 
     const links = [
@@ -277,15 +279,27 @@
         icon: "💼"
       },
       {
-        title: "Research Group Website",
+        title: "Gynecologic Oncology Research Enterprise at UAB - Research Team",
         description: "See my lab, projects, and research environment",
         url: "https://sites.uab.edu/arendlab/research-team/",
         icon: "🔬"
       },
       {
+        title: "Resume",
+        description: "View my CV / resume PDF",
+        url: "CV.pdf",
+        icon: "📄"
+      },
+      {
+        title: "ResearchGate",
+        description: "See my research profile and publications",
+        url: "https://www.researchgate.net/profile/Dhruva-Dave",
+        icon: "📚"
+      },
+      {
         title: "Email",
         description: "Reach me directly",
-        url: "mailto:dmdave@uabmc.edu",
+        url: "mailto:dhruvadave@uabmc.edu",
         icon: "✉️"
       }
     ];
@@ -294,6 +308,8 @@
     const titleEl = document.getElementById("title");
     const subtitleEl = document.getElementById("subtitle");
     const avatarEl = document.getElementById("avatar");
+    const headshotEl = document.getElementById("headshot");
+    const initialsEl = document.getElementById("initials");
     const linksEl = document.getElementById("links");
 
     nameEl.textContent = profile.name;
@@ -307,7 +323,13 @@
       .map(part => part[0].toUpperCase())
       .join("");
 
-    avatarEl.textContent = initials || "YN";
+    initialsEl.textContent = initials || "YN";
+
+    if (profile.headshotUrl && !profile.headshotUrl.includes("example.com")) {
+      headshotEl.src = profile.headshotUrl;
+      headshotEl.style.display = "block";
+      initialsEl.style.display = "none";
+    }
 
     links.forEach((link, index) => {
       const a = document.createElement("a");
